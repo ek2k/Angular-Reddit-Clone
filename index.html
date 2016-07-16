@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="redditApp">
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Oranienbaum' rel='stylesheet" type="text/css">
+    <meta charset="utf-8">
+    <title>Angular Reddit Clone</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+    <link rel="stylesheet" href="style.css" type="text/css" charset="utf-8">
+  </head>
+  <body ng-controller="UserPosts">
+    <nav class="navbar navbar-default">
+      <div class="navbar-header">
+        <p class="navbar-text">
+          Angular Reddit Clone
+        </p>
+        <div class="btn-group">
+          <button type="button" class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">+ Add a Post</button>
+          <form class="dropdown-menu" ng-submit="addPost()">
+            <input type="text" ng-model="post.title" placeholder="Title">
+            <input type="text" ng-model="post.author" placeholder="Author">
+            <input type="text" ng-model="post.description" placeholder="Write a description">
+            <input type="text" ng-model="post.img" placeholder="img URL">
+            <input type="submit">
+          </form>
+        </div>
+        <div class="btn-group">
+          <button type="button"class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Votes <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a href="#">Votes</a></li>
+            <li><a href="#">Date</a></li>
+            <li><a href="#">Title</a></li>
+          </ul>
+        </div>
+        <form class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+        </form>
+      </div>
+    </nav>
+    <div ng-repeat="post in postList">
+      <div class="postBox">
+        <div class="col-sm-2"><img ng-src="{{post.img}}"/></div>
+        <div class="col-sm-10">
+          <div class="row">
+            <span class="title">{{post.title}}</span>
+            <span class="author">By: {{post.author}}</span>
+          </div>
+          <p class="description">{{post.description}}</p>
+          <span class="time">{{post.time}}</span>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js" charset="utf-8"></script>
+  </body>
+</html>
