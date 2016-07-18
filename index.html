@@ -59,10 +59,10 @@
           <button class="glyphicon glyphicon-thumbs-down" type="button" ng-click="thumbsDown()"></button>
           <span>{{post.vote}}</span>
           <!-- Comments -->
-          <div class="commentBox">
+          <div class="row-fluid commentBox">
             <div class="btn-group">
               <button type="button" class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Comment</button>
-              <form class="dropdown-menu" ng-submit="view.addComment()">
+              <form class="dropdown-menu" ng-submit="addComment()">
                 <input type="text" ng-model="view.comment.author" placeholder="Author">
                 <input type="text" ng-model="view.comment.comment" placeholder="Comment">
                 <input type="submit">
@@ -70,8 +70,8 @@
             </div>
             <div ng-repeat="comment in view.commentList">
               <div class="comments">
-                <span>{{view.comment.author}}</span>
-                <span>{{view.comment.comment}}</span>
+                <span>{{comment.author}}</span>
+                <span>{{comment.comment}}</span>
               </div>
             </div>
           </div>

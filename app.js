@@ -45,9 +45,9 @@ app.controller('UserPosts', function($scope, orderByFilter){
 
   $scope.addComment = function(){
     var newComment = {};
-    newComment.author = $scope.comment.author;
-    newComment.comment = $scope.comment.comment;
-    $scope.commentList.push(newComment);
+    newComment.author = $scope.view.comment.author;
+    newComment.comment = $scope.view.comment.comment;
+    $scope.view.commentList.push(newComment);
   }
 
   // $scope.postList = [{
