@@ -1,21 +1,25 @@
 var app = angular.module("redditApp", []);
 
 app.controller('UserPosts', function($scope, orderByFilter){
-  $scope.postList = [];
-  $scope.post = {};
-  $scope.sort = ['Vote', 'Date', 'Title'];
+  $scope.view = {};
+  $scope.view.postList = [];
+  $scope.view.post = {};
+  $scope.view.commentList = [];
+  $scope.view.comment = {};
+  $scope.view.filter = 'Vote';
+  $scope.view.sort = ['Vote', 'Date', 'Title'];
+  $scope.view.value = '-vote';
   $scope.addPost = function(){
-    $scope.post.vote = 0;
-    $scope.post.time = moment().calendar();
+    $scope.view.post.vote = 0;
+    $scope.view.post.date = moment().calendar();
     var newPost = {};
-    newPost.author = $scope.post.author;
-    newPost.title = $scope.post.title;
-    newPost.description = $scope.post.description;
-    newPost.img = $scope.post.img;
-    newPost.time = $scope.post.time;
-    newPost.vote = $scope.post.vote;
-    $scope.postList.push(newPost);
-    $scope.postList = orderByFilter($scope.postList, $scope.post.vote);
+    newPost.author = $scope.view.post.author;
+    newPost.title = $scope.view.post.title;
+    newPost.description = $scope.view.post.description;
+    newPost.img = $scope.view.post.img;
+    newPost.date = $scope.view.post.date;
+    newPost.vote = $scope.view.post.vote;
+    $scope.view.postList.push(newPost);
   }
 
   $scope.thumbsUp = function(){
@@ -27,10 +31,24 @@ app.controller('UserPosts', function($scope, orderByFilter){
   }
 
   $scope.sortVal = function(val){
-    $scope.filter = val;
-    $scope.postList = orderByFilter($scope.postList, $scope.post.vote);
-  }
+    if(val === 'Vote'){
+      $scope.view.value = '-vote';
+      $scope.view.filter = 'Vote';
+    }else if (val === 'Date') {
+      $scope.view.value = '-date';
+      $scope.view.filter = 'Date';
+    }else if (val === 'Title') {
+      $scope.view.value = 'title';
+      $scope.view.filter = 'Title';
+    }
+  };
 
+  $scope.addComment = function(){
+    var newComment = {};
+    newComment.author = $scope.comment.author;
+    newComment.comment = $scope.comment.comment;
+    $scope.commentList.push(newComment);
+  }
 
   // $scope.postList = [{
   //   author: "Ed",

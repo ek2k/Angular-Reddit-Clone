@@ -22,18 +22,18 @@
         <div class="btn-group">
           <button type="button" class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">+ Add a Post</button>
           <form class="dropdown-menu" ng-submit="addPost()">
-            <input type="text" ng-model="post.title" placeholder="Title">
-            <input type="text" ng-model="post.author" placeholder="Author">
-            <input type="text" ng-model="post.description" placeholder="Write a description">
-            <input type="text" ng-model="post.img" placeholder="img URL">
+            <input type="text" ng-model="view.post.title" placeholder="Title">
+            <input type="text" ng-model="view.post.author" placeholder="Author">
+            <input type="text" ng-model="view.post.description" placeholder="Write a description">
+            <input type="text" ng-model="view.post.img" placeholder="img URL">
             <input type="submit">
           </form>
         </div>
         <!-- Sort Button -->
         <div class="btn-group">
-          <button type="button"class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort By Votes <span class="caret"></span></button>
+          <button type="button"class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort By {{view.filter}} <span class="caret"></span></button>
           <ul class="dropdown-menu">
-            <li ng-repeat="val in sort"><a href="#" ng-click="sortVal(val)">Sort by {{val}}</a></li>
+            <li ng-repeat="val in view.sort"><a href="#" ng-click="sortVal(val)">Sort by {{val}}</a></li>
           </ul>
         </div>
         <!-- Search Field -->
@@ -45,19 +45,36 @@
       </div>
     </nav>
     <!-- Posts -->
-    <div ng-repeat="post in postList | filter:search">
+    <div ng-repeat="post in view.postList | filter:search | orderBy:view.value">
       <div class="postBox">
-        <div class="col-sm-2"><img ng-src="{{post.img}}"/></div>
+        <div class="col-sm-2"><img ng-src="{{view.post.img}}"/></div>
         <div class="col-sm-10">
           <div class="row">
             <span class="title">{{post.title}}</span>
             <span class="author">By: {{post.author}}</span>
           </div>
           <p class="description">{{post.description}}</p>
-          <p class="time">{{post.time}}</p>
+          <p class="time">{{post.date}}</p>
           <button class="glyphicon glyphicon-thumbs-up" type="button" ng-click="thumbsUp()"></button>
           <button class="glyphicon glyphicon-thumbs-down" type="button" ng-click="thumbsDown()"></button>
-          {{post.vote}}
+          <span>{{post.vote}}</span>
+          <!-- Comments -->
+          <div class="commentBox">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Comment</button>
+              <form class="dropdown-menu" ng-submit="view.addComment()">
+                <input type="text" ng-model="view.comment.author" placeholder="Author">
+                <input type="text" ng-model="view.comment.comment" placeholder="Comment">
+                <input type="submit">
+              </form>
+            </div>
+            <div ng-repeat="comment in view.commentList">
+              <div class="comments">
+                <span>{{view.comment.author}}</span>
+                <span>{{view.comment.comment}}</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
